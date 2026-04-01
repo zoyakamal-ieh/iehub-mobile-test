@@ -1,2422 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800;900&family=Nunito:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Amiri&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --brand-navy: #00203F; 
+            --brand-navy-light: #003056; 
+            --brand-orange: #ECA400; 
+            --brand-white: #FFFFFF; 
+            --brand-grey: #F3F3F3; 
+        }
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: auto; /* Changed from 100vh to prevent forcing extra space */
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    -webkit-font-smoothing: antialiased;
-    overflow: hidden; /* Lock scroll to clean up the frame */
-  }
+        /* --- 1. CORE SCROLL FIXES --- */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--brand-white);
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto !important; /* Forces scroll to work */
+            -webkit-overflow-scrolling: touch;
+        }
 
-  /* Background Icons */
-  .icon-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    overflow: hidden;
-  }
+        /* --- 2. HERO SECTION (ALİ-IMRAN) --- */
+        .hero-section {
+            width: 100%;
+            background: radial-gradient(circle at center, var(--brand-navy-light) 0%, var(--brand-navy) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            box-sizing: border-box;
+        }
 
-  .floating-icon {
-    position: absolute;
-    fill: #d4af37;
-    opacity: 0.04;
-    animation: slowDrift 20s infinite ease-in-out alternate;
-  }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            text-transform: uppercase;
+            line-height: 0.95;
+            margin-bottom: 30px;
+        }
 
-  .i1 { width: 100px; top: 8%; left: 7%; }
-  .i2 { width: 70px; top: 12%; right: 12%; animation-delay: -3.5s; }
-  .i3 { width: 110px; bottom: 12%; left: 10%; animation-delay: -7s; }
+        .arabic-verse {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: var(--brand-orange);
+            direction: rtl;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
 
-  @keyframes slowDrift {
-    0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-    100% { transform: translate3d(15px, -20px, 0) rotate(5deg); }
-  }
+        .translation {
+            font-style: italic;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-  .hero-container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px 15px 10px 15px; /* Tightened bottom padding */
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 10;
-  }
+        /* --- 3. THE GOLDEN CIRCLE (RE-STACKED) --- */
+        .section-wrapper {
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-  h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-size: clamp(2.2rem, 10vw, 5.5rem); 
-    line-height: 0.95;
-    margin: 0 0 10px 0;
-    letter-spacing: -1px;
-    text-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    width: 100%;
-  }
+        .gc-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
 
-  h1 span {
-    display: block;
-  }
+        .circle-viz {
+            width: 250px;
+            height: 250px;
+            border: 3px solid var(--brand-navy);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-  .swipe-zone {
-    margin: 5px 0 25px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+        .circle-inner {
+            width: 40%;
+            height: 40%;
+            background: var(--brand-orange);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            color: var(--brand-navy);
+        }
 
-  .chevron {
-    width: 12px;
-    height: 12px;
-    border-right: 3px solid #d4af37;
-    border-bottom: 3px solid #d4af37;
-    transform: rotate(45deg);
-    animation: pulse 2s infinite;
-  }
+        /* --- 4. COMMITTEE ROLES (STACKED FOR MOBILE) --- */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
 
-  @keyframes pulse {
-    0% { transform: rotate(45deg) translate(-5px, -5px); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: rotate(45deg) translate(5px, 5px); opacity: 0; }
-  }
+        .role-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
 
-  .swipe-text {
-    color: #d4af37;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin-top: 4px;
-  }
+        .role-card:hover { border-color: var(--brand-orange); transform: translateY(-5px); }
 
-  .verse-content {
-    width: 100%;
-    max-width: 850px; 
-    padding-bottom: 20px; /* Reduced from 60px to remove extra space */
-  }
+        .role-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--brand-grey);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+        }
 
-  .arabic {
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
-    color: #d4af37;
-    margin-bottom: 15px;
-    display: block;
-    line-height: 1.7;
-    direction: rtl;
-  }
+        /* --- 5. FAQ DROPDOWNS --- */
+        .faq-item {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
-  .translation {
-    font-family: 'Nunito', sans-serif;
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-    margin: 0 auto 10px auto;
-  }
+        .faq-header {
+            background: #f8fafc;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+        }
 
-  .citation {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    color: rgba(212, 175, 55, 0.5);
-    text-transform: uppercase;
-    letter-spacing: 5px;
-  }
+        .faq-body {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease-out;
+            background: white;
+        }
 
-  @media (min-width: 1024px) {
-    .hero-container { padding-top: 40px; } /* Adjusted desktop padding */
-    h1 { letter-spacing: -3px; line-height: 0.85; margin-bottom: 20px; }
-  }
+        /* --- 6. SHIMMER BUTTON --- */
+        .btn-container { text-align: center; margin: 40px 0; }
+        .shimmer-btn {
+            background: var(--brand-orange);
+            color: var(--brand-navy);
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
-  @media (max-width: 480px) {
-    .floating-icon { display: none; }
-  }
-</style>
+        @media (max-width: 600px) {
+            .hero-section { padding: 40px 15px; }
+            .role-card { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="icon-canvas">
-    <svg class="floating-icon i1" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.5-3-3-7.5-7.5 3 3 7.5zM12 10.9c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/></svg>
-    <svg class="floating-icon i2" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
-    <svg class="floating-icon i3" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-  </div>
+    <section class="hero-section">
+        <h1>Leadership & Planning</h1>
+        <div class="arabic-verse">فَبِمَا رَحْمَةٍۢ مِّنَ ٱللَّهِ لِنتَ لَهُمْ... فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى ٱللَّهِ</div>
+        <p class="translation">"Once you make a decision, put your trust in Allah. Surely Allah loves those who trust in Him." (3:159)</p>
+    </section>
 
-  <div class="hero-container" id="fosis-leadership-unit">
-    <h1>
-      <span>Leadership</span>
-      <span>& Planning</span>
-    </h1>
-    
-    <div class="swipe-zone">
-      <div class="chevron"></div>
-      <div class="swipe-text">EXPLORE</div>
-    </div>
-
-    <div class="verse-content">
-      <span class="arabic">فَبِمَا رَحْمَةٍۢ مِّنَ ٱللَّهِ لِنتَ لَهُمْ ۖ وَلَوْ كُنتَ فَظًّا غَلِيظَ ٱلْقَلْبِ لَٱنفَضُّوا۟ مِنْ حَوْلِكَ ۖ فَٱعْفُ عَنْهُمْ وَٱسْتَغْفِرْ لَهُمْ وَشَاوِرْهُمْ فِى ٱلْأَمْرِ ۖ فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى ٱللَّهِ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُتَوكِّلِينَ</span>
-      <p class="translation">"It is out of Allah’s mercy that you have been lenient with them... Once you make a decision, put your trust in Allah. Surely Allah loves those who trust in Him."</p>
-      <div class="citation">Surah Ali-Imran 3:159</div>
-    </div>
-  </div>
-
-  <script>
-    function sendHeight() {
-      const unit = document.getElementById('fosis-leadership-unit');
-      if (unit) {
-        // offsetHeight captures the content size precisely
-        window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: unit.offsetHeight }, '*');
-      }
-    }
-    window.onload = sendHeight;
-    window.onresize = sendHeight;
-    setTimeout(sendHeight, 1500);
-  </script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Nunito:wght@500;600&display=swap" rel="stylesheet">
-<style>
-    html, body { margin: 0; padding: 0; width: 100%; background: #FFFFFF; overflow-x: hidden; }
-    
-    .hub-unified-container {
-        font-family: 'Nunito', sans-serif;
-        color: #00203F;
-        width: 100%;
-        max-width: 1100px;
-        margin: auto;
-        padding: 15px 10px;
-        box-sizing: border-box;
-    }
-
-    /* 1. QUICK LINKS SECTION */
-    .links-section { padding-bottom: 30px; text-align: center; }
-    
-    .hub-title {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 800;
-        text-transform: uppercase;
-        margin: 0 0 5px 0;
-        font-size: clamp(1.1rem, 5vw, 1.8rem);
-        letter-spacing: 1px;
-    }
-
-    .static-arrow {
-        color: #ECA400;
-        font-size: 1rem;
-        display: inline-block;
-        margin-bottom: 5px;
-        opacity: 0.8;
-    }
-
-    .sub-instruction {
-        display: block;
-        font-size: 0.7rem;
-        font-weight: 700;
-        color: #64748B;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-    }
-
-    .btn-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 10px;
-        justify-items: center;
-    }
-
-    .resource-card {
-        background: #ECA400;
-        border: 2px solid #ECA400;
-        border-radius: 8px;
-        text-decoration: none;
-        color: #00203F;
-        display: flex;
-        align-items: center;
-        padding: 10px 15px;
-        width: 100%;
-        max-width: 340px;
-        transition: 0.2s ease;
-        box-sizing: border-box;
-    }
-
-    .resource-card:hover { background: #00203F; color: #FFFFFF; border-color: #00203F; }
-    .card-icon { font-size: 1.4rem; margin-right: 12px; }
-    .card-main { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
-
-    /* 2. THE VISUAL BRIDGE */
-    .scroll-bridge {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 10px 0;
-    }
-    .bridge-line { width: 40px; height: 3px; background: #F1F5F9; border-radius: 2px; margin-bottom: 5px; }
-    .bridge-text { font-size: 0.7rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* 3. GOLDEN CIRCLE SECTION */
-    .gc-section { border-top: 2px solid #F1F5F9; padding-top: 30px; margin-top: 10px; }
-    .gc-layout { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-
-    @media (min-width: 900px) { .gc-layout { flex-direction: row; gap: 40px; } }
-
-    .circle-viz { flex: 1; width: 100%; max-width: 280px; position: relative; }
-    .circle-outer { width: 100%; padding-bottom: 100%; border: 3px solid #00203F; border-radius: 50%; position: relative; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .circle-middle { width: 68%; height: 68%; border: 3px solid #00203F; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: #fff; }
-    .circle-inner { width: 45%; height: 45%; background: #ECA400; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 5; }
-
-    .jump-why { transform: translate(-50%, -50%) scale(1.2); box-shadow: 0 10px 25px rgba(0, 32, 63, 0.2); }
-    .jump-how { transform: translate(-50%, -50%) scale(1.1); border-color: #ECA400; box-shadow: 0 0 20px rgba(236, 164, 0, 0.2); z-index: 4; }
-    .jump-what { transform: scale(1.05); border-color: #ECA400; box-shadow: 0 0 20px rgba(236, 164, 0, 0.2); }
-
-    .circle-text { font-family: 'Montserrat', sans-serif; font-weight: 800; position: absolute; font-size: 0.8rem; width: 100%; text-align: center; pointer-events: none; }
-    .label-what { bottom: 8%; } .label-how { bottom: 12%; }
-
-    /* 4. ACCORDIONS & SIDE-BY-SIDE CONTENT */
-    .gc-content { flex: 1.2; width: 100%; display: flex; flex-direction: column; gap: 8px; }
-    .acc-item { border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
-    .acc-header { width: 100%; display: flex; justify-content: space-between; padding: 12px; background: #FFF; border: none; border-left: 4px solid transparent; cursor: pointer; text-align: left; transition: 0.3s; }
-    .acc-header.active { background: #F8FAFC; border-left-color: #ECA400; }
-    .acc-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
-    
-    .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #F8FAFC; }
-    
-    .acc-body-inner { 
-        padding: 20px; 
-        display: flex; 
-        flex-direction: row; 
-        align-items: center; 
-        justify-content: space-between;
-        gap: 15px;
-    }
-
-    .acc-body p { 
-        margin: 0; 
-        color: #475569; 
-        font-size: 1.05rem; /* Increased font size */
-        line-height: 1.6; 
-        flex: 1; 
-        text-align: left;
-        font-weight: 500;
-    }
-
-    .acc-image {
-        width: 100px; /* Increased image size slightly for balance */
-        height: 100px; 
-        object-fit: cover;
-        border-radius: 50%; 
-        border: 2px solid #ECA400; 
-        flex-shrink: 0; 
-        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-
-    @media (max-width: 400px) {
-        .acc-body-inner { flex-direction: column; text-align: center; }
-        .acc-body p { text-align: center; order: 2; font-size: 0.95rem; }
-        .acc-image { order: 1; margin-bottom: 10px; width: 80px; height: 80px; }
-    }
-</style>
-</head>
-<body>
-
-<div class="hub-unified-container" id="hub-root">
-    
-    <div class="links-section">
-        <h3 class="hub-title">Quick Links & Templates</h3>
-        <span class="static-arrow">▼</span>
-        <span class="sub-instruction">click and save as a copy!</span>
+    <div class="section-wrapper">
+        <h2 style="text-align:center; text-transform:uppercase; color:var(--brand-navy)">Building Your Committee</h2>
+        <p style="text-align:center; color:#475569">Knowing your role directly affects how well the society functions. We help you lead with Barakah, not stress.</p>
         
-        <div class="btn-grid">
-            <a href="https://docs.google.com/document/d/1xcP6-OujnQzNXpePP0Q8WKLlHkrsZHgUUzmCPXaNGqQ/edit?usp=sharing" target="_blank" class="resource-card">
-                <span class="card-icon">📜</span>
-                <span class="card-main">Constitution Template</span>
-            </a>
-            <a href="https://docs.google.com/document/d/19upTZZdkEQYlGoW6HdQP0RP33dvaBEZ_/edit?usp=sharing" target="_blank" class="resource-card">
-                <span class="card-icon">⏱️</span>
-                <span class="card-main">Minutes Template</span>
-            </a>
-            <a href="https://docs.google.com/document/d/1Q7gdVCFR_7FenF3ZRekINJBHFGfNHGIe/edit?usp=sharing" target="_blank" class="resource-card">
-                <span class="card-icon">🤝</span>
-                <span class="card-main">Handover Checklist</span>
-            </a>
+        <div class="roles-grid">
+            <div class="role-card">
+                <div class="role-icon">🏛️</div>
+                <h3>President</h3>
+                <p>Overall vision and responsibility. Primary contact for the SU.</p>
+            </div>
+            <div class="role-card">
+                <div class="role-icon">⏱️</div>
+                <h3>Secretary</h3>
+                <p>Administrative lead. Manages bookings and minutes.</p>
+            </div>
+            <div class="role-card">
+                <div class="role-icon">💰</div>
+                <h3>Treasurer</h3>
+                <p>Financial guardian. Oversees budget and transparency.</p>
+            </div>
         </div>
     </div>
 
-    <div class="scroll-bridge">
-        <div class="bridge-line"></div>
-        <span class="bridge-text">The Golden Circle</span>
-        <div class="bridge-line" style="margin-top:5px"></div>
-    </div>
-
-    <div class="gc-section">
-        <h3 class="hub-title" style="margin-bottom: 20px;">The Golden Circle</h3>
-        <div class="gc-layout">
+    <div class="section-wrapper" style="background:#f8fafc">
+        <h2 style="text-align:center; text-transform:uppercase;">The Golden Circle</h2>
+        <div class="gc-grid">
             <div class="circle-viz">
-                <div class="circle-outer" id="viz-what">
-                    <span class="circle-text label-what">WHAT</span>
-                    <div class="circle-middle" id="viz-how">
-                        <span class="circle-text label-how">HOW</span>
-                        <div class="circle-inner jump-why" id="viz-why"><span class="circle-text" style="position:relative; color:#00203F;">WHY</span></div>
-                    </div>
-                </div>
+                <div class="circle-inner">WHY</div>
             </div>
-
-            <div class="gc-content">
-                <div class="acc-item">
-                    <button class="acc-header active" data-type="why" onclick="toggleAcc(this)">
-                        <span class="acc-title" style="color: #ECA400;">Why</span>
-                        <span class="toggle-icon">−</span>
-                    </button>
-                    <div class="acc-body" id="default-open">
-                        <div class="acc-body-inner">
-                            <p>The purpose. To serve & uplift Muslim students for the sake of Allah (SWT).</p>
-                            <img src="https://i.ibb.co/4wJnfjc3/IMG-20230708-WA0066.jpg" alt="Why" class="acc-image">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="acc-item">
-                    <button class="acc-header" data-type="how" onclick="toggleAcc(this)">
-                        <span class="acc-title">How</span>
-                        <span class="toggle-icon">+</span>
-                    </button>
-                    <div class="acc-body">
-                        <div class="acc-body-inner">
-                            <p>The process. By planning with sincerity, teamwork, and effective communication.</p>
-                            <img src="https://i.ibb.co/DDTHY1VB/IMG-20240911-WA0039.jpg" alt="How" class="acc-image">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="acc-item">
-                    <button class="acc-header" data-type="what" onclick="toggleAcc(this)">
-                        <span class="acc-title">What</span>
-                        <span class="toggle-icon">+</span>
-                    </button>
-                    <div class="acc-body">
-                        <div class="acc-body-inner">
-                            <p>The proof. Through high-quality events, socials, welfare services, and dawah activities.</p>
-                            <img src="https://i.ibb.co/qMwnq8r7/Screenshot-2025-07-09-132149.png" alt="What" class="acc-image">
-                        </div>
-                    </div>
-                </div>
+            <div style="max-width:600px">
+                <p><strong>Why:</strong> The purpose. To serve & uplift Muslim students for the sake of Allah.</p>
+                <p><strong>How:</strong> The process. Through teamwork and effective communication.</p>
+                <p><strong>What:</strong> The proof. High-quality events and dawah activities.</p>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function sendHeight() {
-        const height = document.getElementById('hub-root').scrollHeight;
-        if (window.parent) {
-            window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height + 20 }, '*');
-        }
-    }
-    const observer = new ResizeObserver(sendHeight);
-    observer.observe(document.getElementById('hub-root'));
+    <div class="section-wrapper">
+        <h2 style="text-align:center; text-transform:uppercase;">Committee FAQs</h2>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-header">How do we prevent burnout? <span>+</span></div>
+            <div class="faq-body"><p>Regular check-ins and shared event leads ensure stress is shared across the team.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-header">What is the Treasurer's duty? <span>+</span></div>
+            <div class="faq-body"><p>Handling funds as a sacred trust (Amanah) from Allah with total honesty.</p></div>
+        </div>
+    </div>
 
-    function toggleAcc(btn) {
-        const body = btn.nextElementSibling;
-        const icon = btn.querySelector('.toggle-icon');
-        const type = btn.getAttribute('data-type');
-        const active = btn.classList.contains("active");
+    <div class="btn-container">
+        <a href="https://drive.google.com/file/d/1k1bU8kVog4ijJgansgMgmi1HsvmvPB4Y/view" target="_blank" class="shimmer-btn">How to run an ISoc →</a>
+    </div>
 
-        document.querySelectorAll('.acc-header').forEach(h => {
-            h.classList.remove("active");
-            h.nextElementSibling.style.maxHeight = "0px";
-            h.querySelector('.toggle-icon').innerText = "+";
-        });
-        
-        document.getElementById('viz-why').classList.remove('jump-why');
-        document.getElementById('viz-how').classList.remove('jump-how');
-        document.getElementById('viz-what').classList.remove('jump-what');
-
-        if (!active) {
-            btn.classList.add("active");
-            body.style.maxHeight = body.scrollHeight + "px";
-            icon.innerText = "−";
+    <script>
+        function toggleFaq(el) {
+            const body = el.querySelector('.faq-body');
+            const isOpen = body.style.maxHeight !== "0px" && body.style.maxHeight !== "";
             
-            if(type === 'why') document.getElementById('viz-why').classList.add('jump-why');
-            if(type === 'how') document.getElementById('viz-how').classList.add('jump-how');
-            if(type === 'what') document.getElementById('viz-what').classList.add('jump-what');
-        }
-    }
-
-    window.addEventListener('load', () => {
-        const d = document.getElementById('default-open');
-        if(d) d.style.maxHeight = d.scrollHeight + "px";
-        sendHeight();
-    });
-</script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
-
-<style>
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; width: 100%; background: #ffffff; overflow-x: hidden; }
-
-  /* 1. ANIMATED TOP CONNECTOR */
-  .top-bridge { 
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    background: #ffffff; 
-    height: 45px; 
-    position: relative; 
-  }
-
-  .connector-line-top { 
-    width: 2px; 
-    height: 0; 
-    background: linear-gradient(to bottom, #F1F5F9, #ECA400); 
-    animation: drawLine 1.2s ease-out forwards;
-  }
-
-  @keyframes drawLine {
-    to { height: 100%; }
-  }
-
-  /* 2. WAVE & DOT */
-  .wave-wrapper { width: 100%; line-height: 0; position: relative; background: #ffffff; }
-  .wave-wrapper svg { width: 100%; height: auto; display: block; aspect-ratio: 1440 / 70; }
-  
-  .gold-dot { 
-    position: absolute; 
-    top: 0; 
-    left: 50%; 
-    transform: translate(-50%, -50%) scale(0);
-    width: 16px; 
-    height: 16px; 
-    background: #ECA400; 
-    border-radius: 50%; 
-    border: 3px solid #ffffff; 
-    box-shadow: 0 0 15px rgba(236, 164, 0, 0.4); 
-    z-index: 30;
-    animation: popDot 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards, pulseDot 2s infinite 1.5s;
-  }
-
-  @keyframes popDot { to { transform: translate(-50%, -50%) scale(1); } }
-  @keyframes pulseDot { 0%, 100% { box-shadow: 0 0 10px rgba(236, 164, 0, 0.4); } 50% { box-shadow: 0 0 25px rgba(236, 164, 0, 0.7); } }
-
-  /* 3. NAVY BANNER */
-  .navy-banner { width: 100%; background-color: #00203F; text-align: center; padding: 30px 18px 70px; margin-top: -1px; position: relative; z-index: 10; }
-  .main-heading { color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 7vw, 42px); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: 1px; line-height: 1.15; }
-  .main-heading span { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; text-transform: none; color: #ECA400; }
-  .accent-line { width: 42px; height: 3px; background: #ECA400; margin: 16px auto 18px; border-radius: 2px; }
-  .banner-subtext { max-width: 720px; margin: 0 auto; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: clamp(14px, 4.2vw, 16px); font-weight: 400; line-height: 1.55; opacity: 0.9; }
-
-  /* 4. SPEECH BUBBLE & PATHS */
-  .divider-system { width: 100%; position: relative; display: flex; flex-direction: column; align-items: center; margin-top: -32px; z-index: 40; }
-  .vertical-path { width: 2px; height: 40px; background: #ECA400; margin-bottom: -5px; }
-  
-  .speech-bubble { 
-    background: #FFFFFF; 
-    width: 64px; 
-    height: 64px; 
-    border-radius: 50%; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1); 
-    border: 3px solid #00203F; 
-    animation: floatIcon 3s infinite ease-in-out;
-    position: relative;
-    z-index: 45;
-  }
-
-  @keyframes floatIcon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  /* Branching Lines to Cards */
-  .bubble-connector-left, .bubble-connector-right {
-    position: absolute;
-    top: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(to right, #ECA400, transparent);
-    z-index: 5;
-    opacity: 0;
-    animation: drawPath 1s ease-out 1.5s forwards;
-  }
-
-  .bubble-connector-left {
-    right: 50%;
-    background: linear-gradient(to left, #ECA400, transparent);
-    transform-origin: right;
-  }
-
-  .bubble-connector-right {
-    left: 50%;
-    transform-origin: left;
-  }
-
-  @keyframes drawPath {
-    from { width: 0; opacity: 0; }
-    to { width: 200px; opacity: 0.4; }
-  }
-
-  /* 5. Q&A STACK */
-  .qa-outer-wrapper { background: #FFFFFF; width: 100%; padding: 40px 15px; position: relative; }
-  .qa-stack { font-family: 'Nunito', sans-serif; display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto; position: relative; z-index: 20; }
-  .topic-group { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 20px; }
-  .qa-card { width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 12px; padding: 40px 25px; position: relative; text-align: center; box-shadow: 0 6px 15px rgba(0,0,0,0.08); transition: 0.3s; }
-  
-  .question-card { background-color: #FFFFFF; border: 2px solid #00203F; color: #00203F; }
-  .answer-card { background-color: #00203F; color: #FFFFFF; border: 2px solid #00203F; flex-grow: 1; }
-
-  .qa-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background-color: #ECA400; color: #00203F; padding: 5px 22px; border-radius: 20px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; border: 2px solid #00203F; z-index: 50; }
-  .qa-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin: 0; line-height: 1.3; }
-  .qa-text-body { font-weight: 600; font-size: 1rem; line-height: 1.6; color: #FFFFFF; }
-
-  /* 6. LEADERSHIP DROPDOWNS */
-  .leadership-dropdown-main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 40px 5%; background: #FFFFFF; }
-  .leadership-divider { width: 100%; margin: 0 auto 40px; height: 1px; background: linear-gradient(to right, transparent, #ECA400, transparent); position: relative; }
-  .leadership-divider::after { content: "💬"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 0 15px; font-size: 1.5rem; }
-
-  .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .leader-drop-card { background: #FFFFFF; border: 1px solid #C7CBC8; border-radius: 8px; overflow: hidden; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-  .leader-drop-card.active { border-left: 6px solid #ECA400; border-color: #ECA400; }
-  
-  .leader-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; }
-  .leader-title { font-family: 'Montserrat', sans-serif; color: #00203F; margin: 0; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-  .leader-icon { font-size: 1.5rem; font-weight: 700; color: #ECA400; transition: 0.3s; }
-  .leader-drop-card.active .leader-icon { transform: rotate(45deg); }
-  
-  .leader-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 25px; background: #F8FAFC; }
-  .leader-body p { margin: 20px 0; color: #475569; font-family: 'Nunito', sans-serif; font-size: 1rem; line-height: 1.6; font-weight: 500; }
-
-  @media (max-width: 600px) { 
-    .qa-stack { gap: 60px; } 
-    .topic-group { min-width: 100%; } 
-    .bubble-connector-left, .bubble-connector-right { display: none; }
-  }
-</style>
-</head>
-<body>
-
-<div id="leadership-master-unified">
-  <div class="top-bridge"><div class="connector-line-top"></div></div>
-  <div class="wave-wrapper">
-    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 70C360 15 1080 15 1440 70V70H0Z" fill="#00203F"/><path d="M0 0H1440V70C1080 15 360 15 0 70V0Z" fill="#ffffff"/>
-    </svg>
-    <div class="gold-dot"></div>
-  </div>
-
-  <div class="navy-banner">
-    <h1 class="main-heading">Lessons in <span>Leadership</span></h1>
-    <div class="accent-line"></div>
-    <p class="banner-subtext">A strong leader is the cornerstone of any effective team. True leadership in an ISoc is about serving your people and the Muslim community with humility and sincerity.</p>
-  </div>
-
-  <div class="divider-system">
-    <div class="vertical-path"></div>
-    <div class="speech-bubble">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#ECA400"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-      <div class="bubble-connector-left"></div>
-      <div class="bubble-connector-right"></div>
-    </div>
-  </div>
-
-  <div class="qa-outer-wrapper">
-    <div class="qa-stack">
-        <div class="topic-group">
-             <div class="qa-card question-card">
-                <div class="qa-badge">QUESTION</div>
-                <h3 class="qa-text">What do you expect from your team?</h3>
-            </div>
-            <div class="qa-card answer-card">
-                <div class="qa-badge">ANSWER</div>
-                <p class="qa-text-body">Prompt task completion, upholding Islamic values & consistent attendance. Empowering individuals with well-defined roles streamlines work and builds confidence. Don't burn out by doing everything yourself.</p>
-            </div>
-        </div>
-        <div class="topic-group">
-            <div class="qa-card question-card">
-                <div class="qa-badge">QUESTION</div>
-                <h3 class="qa-text">How do we improve our communication as Muslim leaders?</h3>
-            </div>
-            <div class="qa-card answer-card">
-                <div class="qa-badge">ANSWER</div>
-                <p class="qa-text-body">With effective communication techniques from the Sunnah. Learn how to convey the message of Islam clearly & compassionately, drawing inspiration from the Prophet's (SAW) methods.</p>
-            </div>
-        </div>
-    </div>
-  </div>
-
-  <div class="leadership-dropdown-main">
-    <div class="leadership-divider"></div>
-    <div class="grid-container">
-        <div class="leader-drop-card" onclick="toggleLeaderCard(this)">
-          <div class="leader-header"><h3 class="leader-title">Lead by Example</h3><span class="leader-icon">+</span></div>
-          <div class="leader-body"><p>Serve your people and the Muslim community with <strong>humility and sincerity</strong>. Lead with <strong>genuine care</strong> and inspire through your actions, your team will naturally follow and respect your guidance.</p></div>
-        </div>
-        <div class="leader-drop-card" onclick="toggleLeaderCard(this)">
-          <div class="leader-header"><h3 class="leader-title">Communicate with Clarity</h3><span class="leader-icon">+</span></div>
-          <div class="leader-body"><p>Clear and consistent communication is vital for team cohesion. Ensure information flows freely, expectations are understood, and feedback is encouraged.</p></div>
-        </div>
-        <div class="leader-drop-card" onclick="toggleLeaderCard(this)">
-          <div class="leader-header"><h3 class="leader-title">Defining Roles</h3><span class="leader-icon">+</span></div>
-          <div class="leader-body"><p>Defining clear roles and reporting structures: everyone knows their responsibilities, who to report to, and where decisions are made.</p></div>
-        </div>
-    </div>
-  </div>
-</div>
-
-<script>
-function sendHeight() {
-    const height = document.getElementById('leadership-master-unified').scrollHeight;
-    window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height + 60 }, '*');
-}
-function toggleLeaderCard(card) {
-    card.classList.toggle("active");
-    var body = card.querySelector('.leader-body');
-    body.style.maxHeight = body.style.maxHeight ? null : body.scrollHeight + "px";
-    setTimeout(sendHeight, 400); 
-}
-const observer = new ResizeObserver(sendHeight);
-observer.observe(document.getElementById('leadership-master-unified'));
-window.onload = sendHeight;
-</script>
-</body>
-</html>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: auto;
-    background: transparent;
-  }
-
-  /* BUTTON WRAPPER (prevents iframe cropping) */
-  .button-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0;
-  }
-
-  .shimmer-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: auto;
-    max-width: 90vw;                 /* ⬅ keeps it inside phone width */
-    padding: clamp(12px, 4vw, 16px)
-             clamp(22px, 8vw, 34px); /* responsive padding */
-
-    background: #f0b323;
-    color: #ffffff;
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-size: clamp(14px, 4.5vw, 16px); /* responsive text */
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    white-space: normal;             /* allows wrapping on tiny screens */
-    line-height: 1.3;
-  }
-
-  .shimmer-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.25);
-  }
-
-  .shimmer-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0.45) 50%,
-      rgba(255,255,255,0) 100%
-    );
-    transform: skewX(-25deg);
-    animation: shimmer 2.8s infinite;
-    pointer-events: none;
-  }
-
-  @keyframes shimmer {
-    0%   { left: -75%; }
-    100% { left: 130%; }
-  }
-
-  /* EXTRA MOBILE SAFETY */
-  @media (max-width: 400px) {
-    .shimmer-button {
-      max-width: 95vw;
-      border-radius: 8px;
-    }
-  }
-</style>
-
-<div class="button-wrap">
-  <a 
-    href="https://drive.google.com/file/d/1byBtnKhtuixiQY8HMO7W4AsrDGqgT2oK/view?usp=sharing"
-    target="_blank"
-    class="shimmer-button"
-  >
-    Learn how to Lead here
-  </a>
-</div>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  ::-webkit-scrollbar { display: none !important; }
-  * { -ms-overflow-style: none !important; scrollbar-width: none !important; box-sizing: border-box; }
-
-  :root {
-    --fosis-navy: #00203F;
-    --fosis-gold: #ECA400;
-    --fosis-grey: #F3F3F3;
-    --white: #FFFFFF;
-    --slate: #475569;
-  }
-
-  body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Outfit', sans-serif;
-    background-color: var(--fosis-grey);
-  }
-
-  /* SEAMLESS TOP TRANSITION */
-  .spine-top {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--fosis-grey);
-  }
-
-  .spine-line {
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent, var(--fosis-navy));
-    opacity: 0.15;
-  }
-
-  .spine-node {
-    width: 10px;
-    height: 10px;
-    background: var(--fosis-navy);
-    border: 2px solid var(--fosis-gold);
-    border-radius: 50%;
-    margin-top: -5px;
-    z-index: 10;
-    box-shadow: 0 0 8px rgba(236, 164, 0, 0.3);
-    animation: beaconPulse 3s infinite ease-in-out;
-  }
-
-  .hero-banner {
-    background-color: var(--fosis-grey);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px 20px 10px 20px; /* Reduced bottom padding from 20px to 10px */
-    color: var(--fosis-navy);
-  }
-
-  .hero-banner h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(1.4rem, 6vw, 2rem);
-    font-weight: 900;
-    margin: 5px 0 10px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    line-height: 1.2;
-  }
-
-  .section-list-container {
-    max-width: 650px;
-    width: 100%;
-    text-align: left;
-  }
-
-  .guide-tag {
-    display: inline-block;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--fosis-gold);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 6px;
-    border-bottom: 2px solid var(--fosis-gold);
-    padding-bottom: 4px;
-  }
-
-  .intro-text {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0 0 15px 0; /* Reduced margin from 20px to 15px */
-    font-weight: 400;
-    color: var(--slate);
-  }
-
-  .link-list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .link-item {
-    color: var(--fosis-navy);
-    font-weight: 700;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 32, 63, 0.06); 
-  }
-
-  .link-item::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background: var(--fosis-gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .link-item:last-child { border-bottom: none; }
-
-  /* REDUCED BOTTOM TRANSITION SPACE */
-  .spine-bottom {
-    width: 100%;
-    height: 15px; /* Reduced from 30px to 15px */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--fosis-grey);
-  }
-
-  @keyframes beaconPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.7; }
-  }
-
-  @media (max-width: 600px) {
-    .hero-banner { padding: 5px 15px 10px 15px; }
-    .link-item { font-size: 0.9rem; }
-  }
-</style>
-</head>
-<body>
-
-<div id="guide-root">
-  <div class="spine-top">
-    <div class="spine-line"></div>
-    <div class="spine-node"></div>
-  </div>
-
-  <section class="hero-banner">
-    <h1>This Section Includes:</h1>
-
-    <div class="section-list-container">
-      <div class="guide-tag">Leadership Excellence</div>
-      <p class="intro-text">
-        Equipping ISoc leaders with the spiritual foundation and practical organizational skills required to manage a successful committee and leave a lasting legacy.
-      </p>
-
-      <div class="link-list">
-        <div class="link-item">Your Intention Matters</div>
-        <div class="link-item">Meeting Excellence</div>
-        <div class="link-item">Building Your Committee</div>
-        <div class="link-item">Committee FAQs</div>
-        <div class="link-item">Key Handover Documentation</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="spine-bottom">
-    <div class="spine-node"></div>
-  </div>
-</div>
-
-<script>
-  function sync() {
-    const height = document.getElementById('guide-root').scrollHeight;
-    window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height }, '*');
-  }
-  window.onload = sync;
-  window.onresize = sync;
-  setInterval(sync, 2000);
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Outfit:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
-
-<style>
-  /* GLOBAL CLEANUP */
-  ::-webkit-scrollbar { display: none !important; }
-  * { -ms-overflow-style: none !important; scrollbar-width: none !important; box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background: transparent;
-  }
-
-  #quran-mini-root {
-    width: 100%;
-    background: transparent;
-    text-align: center;
-    overflow: hidden;
-    /* REMOVED BOTTOM PADDING */
-    padding: 0; 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* CENTERED BRIDGE CONNECTOR */
-  .verse-bridge {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 40px;
-    margin-bottom: 10px;
-  }
-
-  .connector-line {
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(to bottom, #e2e8f0, #ECA400);
-    opacity: 0.6;
-  }
-
-  /* THE VERSE ISLAND - Refined for Mobile */
-  .verse-island {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    width: 90%;
-    background: #F3F3F3; 
-    padding: 50px 8%;
-    border-radius: 40px;
-    border: 1px solid rgba(0, 32, 63, 0.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
-    /* Added margin-bottom to provide breathing room inside the frame instead of outside */
-    margin-bottom: 10px; 
-  }
-
-  /* ARABIC SHIMMER */
-  .arabic-shimmer {
-    font-family: 'Amiri', serif;
-    font-size: clamp(1.1rem, 4vw, 1.4rem);
-    line-height: 1.8;
-    margin-bottom: 20px;
-    direction: rtl;
-    color: #00203F;
-    animation: softShimmer 6s infinite ease-in-out;
-  }
-
-  @keyframes softShimmer {
-    0%, 100% { opacity: 0.85; color: #00203F; } 
-    50% { opacity: 1; color: #ECA400; text-shadow: 0 0 10px rgba(236, 164, 0, 0.2); } 
-  }
-
-  .quote-marks {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    color: #ECA400;
-    line-height: 0;
-    margin-bottom: 15px;
-    opacity: 0.3;
-  }
-
-  .verse-translation {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    font-weight: 700;
-    color: #00203F;
-    line-height: 1.6;
-    max-width: 500px;
-    margin: 0 auto;
-    font-style: italic;
-  }
-
-  .verse-citation {
-    margin-top: 25px;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-    color: #124A7A;
-    font-size: 9px;
-    letter-spacing: 3px;
-    opacity: 0.5;
-    text-transform: uppercase;
-  }
-
-  @media (max-width: 600px) {
-    .verse-island { 
-        padding: 40px 20px;
-        border-radius: 30px; 
-        width: 85%;
-    }
-  }
-</style>
-</head>
-
-<body>
-
-<div id="quran-mini-root">
-
-    <div class="verse-bridge">
-        <div class="connector-line"></div>
-    </div>
-
-    <div class="verse-island">
-        <div class="arabic-shimmer">
-            لَّيۡسَ عَلَيۡكَ هُدَىٰهُمۡ وَلَٰكِنَّ ٱللَّهَ يَهۡدِي مَن يَشَآءُۗ وَمَا تُنفِقُواْ مِنۡ خَيۡرٖ فَلِأَنفُسِكُمۡۚ...
-        </div>
-
-        <div class="quote-marks">“</div>
-
-        <blockquote class="verse-translation">
-            "Whatever good you spend is for yourselves... and whatever you spend of good – it will be fully repaid to you, and you will not be wronged."
-        </blockquote>
-
-        <div class="verse-citation">
-            — Surah Al-Baqarah 2:272 —
-        </div>
-    </div>
-
-</div>
-
-<script>
-  function sync() {
-    const el = document.getElementById('quran-mini-root');
-    if (el) {
-        // Using offsetHeight for more precise measurement of the container
-        const height = el.offsetHeight;
-        window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height }, '*');
-    }
-  }
-  window.onload = sync;
-  window.onresize = sync;
-  // Interval helps handle font-loading shifts
-  setInterval(sync, 1000);
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Nunito:wght@500;600;700&display=swap" rel="stylesheet">
-
-<style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; width: 100%; background: #ffffff; overflow-x: hidden; }
-
-    .meeting-hub-main {
-        font-family: 'Nunito', sans-serif;
-        font-weight: 500;
-        color: #00203F;
-        width: 100%;
-        background: #FFFFFF;
-        line-height: 1.6;
-    }
-
-    /* 3. REFINED NATIVE HEADER */
-    .mtg-header {
-        background-color: #f8fafc;
-        padding: 50px 20px 45px 20px; /* Increased top padding since arc is gone */
-        text-align: center;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .mtg-header h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        font-size: clamp(1.8rem, 6vw, 2.8rem);
-        color: #00203F;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        line-height: 1.1;
-    }
-
-    .mtg-tagline {
-        margin: 10px 0 0;
-        color: #ECA400;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.75rem;
-        letter-spacing: 4px;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-
-    /* STATIC ARROW */
-    .header-arrow {
-        margin: 20px auto 0;
-        width: 28px;
-        height: 28px;
-        color: #ECA400;
-        display: block;
-    }
-
-    /* TAB SYSTEM */
-    .tab-nav {
-        display: flex;
-        flex-wrap: wrap;
-        background: #F8FAFC;
-        border-radius: 12px;
-        padding: 8px;
-        margin: 25px auto;
-        border: 1px solid #C7CBC8;
-        gap: 8px;
-        max-width: 1100px;
-    }
-
-    .mtg-btn {
-        flex: 1;
-        min-width: 180px;
-        padding: 14px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 800;
-        transition: 0.3s;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-    }
-
-    .mtg-btn.active { background: #124A7A; color: white; }
-    .mtg-btn.inactive { background: transparent; color: #124A7A; }
-
-    /* CONTENT BLOCKS */
-    .mtg-content { display: none; animation: fadeIn 0.5s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    .rule-card {
-        background: #FFFFFF;
-        border: 1px solid #C7CBC8;
-        padding: 25px;
-        border-radius: 8px;
-        border-top: 6px solid #124A7A;
-        position: relative;
-        height: 100%;
-    }
-
-    .rule-num {
-        background: #124A7A;
-        color: white;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        position: absolute;
-        top: -15px;
-        left: 20px;
-    }
-
-    .strategy-box {
-        background: #00203F;
-        color: white;
-        padding: 30px;
-        border-radius: 8px;
-        border-left: 8px solid #ECA400;
-        margin-bottom: 20px;
-    }
-
-    @media (max-width: 600px) {
-        .mtg-header { padding: 40px 15px 40px; }
-        .rule-card { padding: 20px; }
-        .tab-nav { margin: 15px 0; }
-    }
-</style>
-</head>
-<body>
-
-<div id="mtg-excellence-root">
-
-    <div class="meeting-hub-main">
-        <div class="mtg-header">
-            <h1>Meeting Excellence</h1>
-            <p class="mtg-tagline">Focused • Efficient • Creative</p>
+            document.querySelectorAll('.faq-body').forEach(b => b.style.maxHeight = "0px");
             
-            <svg class="header-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-        </div>
-
-        <div style="max-width: 1100px; margin: auto; padding: 25px 15px;">
-            
-            <div style="text-align: center; margin-bottom: 25px;">
-                <p style="font-size: 1rem; color: #475569; max-width: 800px; margin: auto;">To make meetings efficient, the host must ensure the meeting <strong>remains focused</strong> and the <strong>agenda is being followed</strong>. However, the goal is to make meetings <span style="color: #124A7A; font-weight: 700;">enjoyable and creative</span>, as opposed to being sterile and corporate.</p>
-            </div>
-
-            <div class="tab-nav">
-                <button onclick="openTab('essentials')" class="mtg-btn active" id="btn-essentials">Must-Know Tips</button>
-                <button onclick="openTab('structural')" class="mtg-btn inactive" id="btn-structure">The Big Picture</button>
-            </div>
-
-            <div id="essentials" class="mtg-content" style="display: block;">
-                <h2 style="font-family: 'Montserrat', sans-serif; color: #00203F; font-size: 1.5rem; text-align: center; margin-bottom: 25px;">3 Rules for Every Session</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                    
-                    <div class="rule-card">
-                        <div class="rule-num">1</div>
-                        <h4 style="font-family: 'Montserrat', sans-serif; color: #124A7A; margin: 10px 0; text-transform: uppercase;">Create an Agenda</h4>
-                        <p style="font-size: 0.9rem; color: #475569;">Prepare ideas beforehand and send the agenda out far in advance. Give a specified amount of time for each item.</p>
-                        <div style="background: #F0F4F8; padding: 10px; border-radius: 4px; border-left: 3px solid #ECA400; margin-top: 10px;">
-                            <small style="font-weight: 700;">PRO TIP:</small><br><small>Always start with an Islamic reminder.</small>
-                        </div>
-                    </div>
-
-                    <div class="rule-card">
-                        <div class="rule-num">2</div>
-                        <h4 style="font-family: 'Montserrat', sans-serif; color: #124A7A; margin: 10px 0; text-transform: uppercase;">Time is Essence</h4>
-                        <p style="font-size: 0.9rem; color: #475569;">Lateness creates a <strong>culture of slack</strong>. Always start and finish on time. Allocate a timekeeper.</p>
-                        <ul style="font-size: 0.85rem; padding-left: 15px; color: #475569;">
-                            <li>Decide on monthly or biweekly meetings.</li>
-                            <li>Regularity increases commitment.</li>
-                        </ul>
-                    </div>
-
-                    <div class="rule-card">
-                        <div class="rule-num">3</div>
-                        <h4 style="font-family: 'Montserrat', sans-serif; color: #124A7A; margin: 10px 0; text-transform: uppercase;">Action Points!</h4>
-                        <p style="font-size: 0.9rem; color: #475569;">First meetings are for ground rules. Close every meeting with a "Thank You."</p>
-                        <div style="background: #FFF8E1; padding: 10px; border-radius: 4px; margin-top: 10px; font-size: 0.85rem; font-weight: 700;">
-                            Never leave without knowing exactly who is responsible for what and the deadlines.
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="structural" class="mtg-content">
-                <div class="strategy-box">
-                    <h3 style="font-family: 'Montserrat', sans-serif; color: #ECA400; margin-top: 0;">1. RUNNING AN AGM</h3>
-                    <p style="font-size: 0.95rem; opacity: 0.9;">Before the Annual General Meeting, preparation is key:</p>
-                    <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; padding-left: 15px; font-size: 0.9rem;">
-                        <li><strong>Showcase Accomplishments:</strong> Coverage of the year's wins.</li>
-                        <li><strong>Documentation:</strong> Role descriptions and manifestos.</li>
-                        <li><strong>Know the Rules:</strong> Study your constitution well.</li>
-                        <li><strong>Invite Stakeholders:</strong> Showcase professionalism.</li>
-                    </ul>
-                </div>
-
-                <div style="background: #F2F4F5; padding: 25px; border-radius: 8px; border-left: 8px solid #124A7A; border: 1px solid #C7CBC8;">
-                    <h3 style="font-family: 'Montserrat', sans-serif; color: #124A7A; margin-top: 0;">2. THE HANDOVER</h3>
-                    <p style="font-size: 0.9rem;">Continuity is key. Put yourself in the position of your successors—what do they need to know?</p>
-                    <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #E0E0E0; margin-top: 15px;">
-                        <strong style="color: #124A7A; text-transform: uppercase; font-size: 0.8rem;">Network Introduction</strong>
-                        <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
-                            <span style="background: #ECA400; color: #00203F; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">Student Union</span>
-                            <span style="background: #ECA400; color: #00203F; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">Sponsors</span>
-                            <span style="background: #ECA400; color: #00203F; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">Alumni</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<script>
-function sendHeight() {
-    const root = document.getElementById('mtg-excellence-root');
-    if (root) {
-        window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: root.scrollHeight + 30 }, '*');
-    }
-}
-
-function openTab(tabId) {
-    document.querySelectorAll('.mtg-content').forEach(c => c.style.display = 'none');
-    document.getElementById(tabId).style.display = 'block';
-    
-    const btnEss = document.getElementById('btn-essentials');
-    const btnStr = document.getElementById('btn-structure');
-    
-    if(tabId === 'essentials') {
-        btnEss.classList.add('active'); btnEss.classList.remove('inactive');
-        btnStr.classList.add('inactive'); btnStr.classList.remove('active');
-    } else {
-        btnStr.classList.add('active'); btnStr.classList.remove('inactive');
-        btnEss.classList.add('inactive'); btnEss.classList.remove('active');
-    }
-    setTimeout(sendHeight, 100);
-}
-
-const observer = new ResizeObserver(sendHeight);
-observer.observe(document.getElementById('mtg-excellence-root'));
-window.onload = sendHeight;
-</script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --primary-navy: #00203F;
-        --accent-gold: #ECA400;
-        --header-grey: #f8fafc;
-        --text-white: #FFFFFF;
-        --text-main: #334155;
-        --text-muted: #475569;
-        --circle-border: #F1F5F9;
-    }
-
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100%;
-        overflow-x: hidden; 
-        background-color: #FFFFFF;
-        height: auto;
-    }
-
-    /* REFINED HEADER AREA */
-    .hero-header {
-        background-color: var(--header-grey);
-        padding: 50px 20px 40px 20px; /* Increased top padding since arc is gone */
-        text-align: center;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .header-logo-circle {
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        border: 4px solid #ffffff;
-        overflow: hidden;
-        margin: 0 auto 20px auto;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .header-logo-circle img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .hero-header h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        font-size: clamp(1.6rem, 6vw, 2.8rem); 
-        color: var(--primary-navy);
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        line-height: 1.1;
-    }
-
-    .header-arrow {
-        margin: 15px auto 0;
-        width: 30px;
-        height: 30px;
-        color: var(--accent-gold);
-        display: block;
-    }
-
-    /* COMMITTEE SECTION */
-    .committee-section {
-        font-family: 'Nunito', sans-serif;
-        width: 100%;
-        background: white;
-    }
-
-    .intro-area {
-        background-color: var(--header-grey);
-        padding: 35px 20px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .intro-content { max-width: 900px; margin: 0 auto; text-align: center; }
-
-    .intro-text {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: var(--text-main);
-        margin-bottom: 15px;
-    }
-
-    .download-link {
-        font-weight: 700;
-        color: var(--primary-navy);
-        text-decoration: none;
-        border-bottom: 2px solid var(--accent-gold);
-        padding-bottom: 2px;
-        transition: 0.3s;
-    }
-
-    .roles-title-container {
-        max-width: 900px;
-        margin: 40px auto 15px auto;
-        padding: 0 20px;
-    }
-
-    .section-divider-title {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 800;
-        font-size: 1.3rem;
-        color: var(--primary-navy);
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .section-divider-title::after {
-        content: "";
-        flex-grow: 1;
-        height: 1px;
-        background: var(--circle-border);
-    }
-
-    .roles-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .role-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        background: #FFFFFF;
-        border-radius: 12px;
-        transition: transform 0.3s ease;
-    }
-
-    .symbol-circle {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        border: 8px solid var(--circle-border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-        background: white;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .role-card:hover .symbol-circle {
-        transform: translateY(-8px) scale(1.05);
-        border-color: var(--accent-gold);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-    }
-
-    .symbol-circle svg { width: 75px; height: 75px; }
-
-    .role-card h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 800;
-        font-size: 1.2rem;
-        color: var(--primary-navy);
-        margin: 0 0 10px 0;
-        text-transform: uppercase;
-    }
-
-    .description {
-        font-size: 0.9rem;
-        line-height: 1.5;
-        color: var(--text-muted);
-        margin: 0;
-        font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-        .roles-grid { grid-template-columns: 1fr; }
-        .section-divider-title { justify-content: center; }
-        .section-divider-title::after { display: none; }
-        .symbol-circle { width: 130px; height: 130px; }
-        .header-logo-circle { width: 120px; height: 120px; } 
-    }
-</style>
-</head>
-<body>
-
-<div id="committee-root">
-    <header class="hero-header">
-        <div class="header-logo-circle">
-            <img src="https://i.ibb.co/jcQzVmf/IMG-20250127-WA0019.jpg" alt="Committee">
-        </div>
-        <h1>Building your committee</h1>
-        <svg class="header-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-    </header>
-
-    <div class="committee-section">
-        <div class="intro-area">
-            <div class="intro-content">
-                <p class="intro-text">Knowing your role directly affects how well the society functions day to day. When roles are clear, tasks don’t get missed and decisions are made faster. It helps committee members know what they are responsible for, who to go to for support or approval, and when to step in or step back.</p>
-                <p class="intro-text">For in-depth information about each role, download our <a href="https://drive.google.com/file/d/1QYBPAiTtlof7X31rbhe_IxKiR1fdpNi2/view" target="_blank" class="download-link">guide</a>!</p>
-            </div>
-        </div>
-
-        <div class="roles-title-container">
-            <div class="section-divider-title">The Big Three</div>
-        </div>
-
-        <div class="roles-grid">
-            <div class="role-card">
-                <div class="symbol-circle">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="25" y="15" width="6" height="65" rx="1" fill="var(--primary-navy)" />
-                        <path d="M31 20 L75 35 L31 50 Z" fill="var(--primary-navy)" />
-                        <rect x="20" y="75" width="16" height="5" rx="1" fill="var(--accent-gold)" />
-                    </svg>
-                </div>
-                <h2>President</h2>
-                <p class="description">Overall responsibility for the society. Provides vision, chairs meetings, oversees the committee, and serves as the primary contact for the Students' Union.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="symbol-circle">
-                    <svg viewBox="0 0 100 100">
-                        <rect x="30" y="30" width="40" height="50" rx="2" stroke="var(--primary-navy)" stroke-width="3" fill="none"/>
-                        <path d="M35 40H65M35 50H65M35 60H55" stroke="var(--accent-gold)" stroke-width="3"/>
-                        <rect x="45" y="25" width="10" height="8" rx="1" fill="var(--primary-navy)"/>
-                    </svg>
-                </div>
-                <h2>Secretary</h2>
-                <p class="description">The administrative lead. Manages bookings, communication, and membership lists. Responsible for taking minutes and keeping the ISoc organized.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="symbol-circle">
-                    <svg viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="30" stroke="var(--primary-navy)" stroke-width="4" fill="none"/>
-                        <text x="50" y="62" font-family="Montserrat" font-weight="800" font-size="35" text-anchor="middle" fill="var(--accent-gold)">£</text>
-                    </svg>
-                </div>
-                <h2>Treasurer</h2>
-                <p class="description">Financial guardian. Oversees the budget, manages reimbursements, ensures financial transparency, and handles fundraising and SU grant applications.</p>
-            </div>
-        </div>
-
-        <div class="roles-title-container">
-            <div class="section-divider-title">Supporting Roles</div>
-        </div>
-
-        <div class="roles-grid">
-            <div class="role-card">
-                <div class="symbol-circle">
-                    <svg viewBox="0 0 100 100">
-                        <path d="M20 40 L60 25 L60 75 L20 60 Z" fill="var(--primary-navy)" />
-                        <path d="M60 40 L80 35 L80 65 L60 60 Z" fill="var(--accent-gold)" opacity="0.8" />
-                        <rect x="15" y="45" width="10" height="10" fill="var(--primary-navy)" />
-                    </svg>
-                </div>
-                <h2>Media & Marketing</h2>
-                <p class="description">Manages the ISoc's external image. Responsible for branding, social media content, and promotional campaigns to engage the student body.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="symbol-circle">
-                    <svg viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="35" fill="none" stroke="var(--primary-navy)" stroke-width="3" />
-                        <path d="M50 20 L60 50 L50 80 L40 50 Z" fill="var(--primary-navy)" />
-                        <path d="M20 50 L50 40 L80 50 L50 60 Z" fill="var(--primary-navy)" opacity="0.5" />
-                        <circle cx="50" cy="50" r="6" fill="var(--accent-gold)" />
-                    </svg>
-                </div>
-                <h2>Events Lead</h2>
-                <p class="description">Delivers the ISoc's activity calendar. Manages event logistics, speaker requests, and ensures all activities provide value to the student body.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function sendHeight() {
-        const height = document.getElementById('committee-root').scrollHeight;
-        window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height + 20 }, '*');
-    }
-    window.onload = sendHeight;
-    window.onresize = sendHeight;
-    setInterval(sendHeight, 1500);
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-<style>
-    /* CLEAN RESET */
-    * { box-sizing: border-box; }
-    html, body { 
-        margin: 0 !important; 
-        padding: 0 !important; 
-        background: transparent;
-        overflow: hidden !important;
-        width: 100%;
-    }
-
-    #button-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px 0;
-    }
-
-    /* THE VERTICAL BRIDGE */
-    .divider-line {
-        width: 2px;
-        height: 15px;
-        background: #ECA400;
-        margin-bottom: 10px;
-    }
-
-    /* HIGH-VISIBILITY NAVY BUTTON */
-    .fosis-action-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        background: #00203F;
-        border: 2px solid #ECA400;
-        padding: 14px 28px;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 400px;
-        text-decoration: none;
-        box-shadow: 0 8px 20px rgba(0,32,63,0.15);
-        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    .fosis-action-btn:active {
-        transform: scale(0.96);
-    }
-
-    .fosis-action-btn:hover {
-        background: #002e5a;
-    }
-
-    .btn-label {
-        font-family: 'Montserrat', sans-serif;
-        color: #FFFFFF;
-        font-weight: 900;
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        text-align: center;
-    }
-
-    .btn-arrow {
-        color: #ECA400;
-        font-size: 18px;
-        font-weight: 900;
-        line-height: 1;
-    }
-
-    .footer-note {
-        margin-top: 8px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 9px;
-        color: #64748b;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        opacity: 0.8;
-    }
-
-    @media (max-width: 600px) {
-        .fosis-action-btn { padding: 12px 20px; }
-        .btn-label { font-size: 11px; letter-spacing: 1px; }
-        .divider-line { height: 10px; }
-    }
-</style>
-</head>
-<body>
-
-<div id="button-container">
-    <div class="divider-line"></div>
-
-    <a href="https://drive.google.com/file/d/1k1bU8kVog4ijJgansgMgmi1HsvmvPB4Y/view?usp=drive_link" target="_blank" class="fosis-action-btn">
-        <span class="btn-label">How to run an ISoc</span>
-        <span class="btn-arrow">→</span>
-    </a>
-
-    <div class="footer-note">Official FOSIS Guide</div>
-</div>
-
-<script>
-    function updateHeight() {
-        const container = document.getElementById('button-container');
-        if (container) {
-            const height = container.getBoundingClientRect().height;
-            window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height + 5 }, '*');
+            if (!isOpen) {
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
         }
-    }
 
-    window.addEventListener('load', updateHeight);
-    window.addEventListener('resize', updateHeight);
-    setInterval(updateHeight, 1500);
-</script>
-
-</body>
-</html>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
-
-<div class="qa-grid-main" style="font-family: 'Nunito', sans-serif; font-weight: 500; color: #00203F; width: 100%; margin: 0 auto; background: #FFFFFF; line-height: 1.6; overflow-x: hidden; box-sizing: border-box; padding: 20px 10px;">
-
-    <div style="text-align: center; max-width: 800px; margin: 0 auto 30px auto; padding-bottom: 5px;">
-        <h2 style="font-family: 'Montserrat', sans-serif; margin: 0; font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 800; color: #00203F; text-transform: uppercase; letter-spacing: 0.5px;">Committee FAQs</h2>
-        
-        <svg style="margin: 10px auto 0; width: 30px; height: 30px; color: #ECA400; display: block;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-
-        <p style="margin: 10px 0 0; color: #475569; font-size: 0.9rem;">Click on a card to reveal the answer.</p>
-    </div>
-
-    <div class="qa-grid-container">
-        <div class="qa-card" onclick="toggleGridCard(this)">
-            <div class="qa-card-header">
-                <span class="qa-icon">1</span>
-                <h3 class="qa-title">What is the single most important principle we must uphold?</h3>
-            </div>
-            <div class="qa-card-body">
-                <p><strong>Sincerity of Intention (Ikhlas).</strong> All actions should be done with pure intention for Allah's pleasure, turning work into worship.</p>
-            </div>
-        </div>
-
-        <div class="qa-card" onclick="toggleGridCard(this)">
-            <div class="qa-card-header">
-                <span class="qa-icon">2</span>
-                <h3 class="qa-title">How do we prevent the committee from burning out?</h3>
-            </div>
-            <div class="qa-card-body">
-                <p><strong>Regular check-ins.</strong> Have the vice team check in often and rotate event leads so stress is shared.</p>
-            </div>
-        </div>
-
-        <div class="qa-card" onclick="toggleGridCard(this)">
-            <div class="qa-card-header">
-                <span class="qa-icon">3</span>
-                <h3 class="qa-title">What is the biggest mistake a new committee makes?</h3>
-            </div>
-            <div class="qa-card-body">
-                <p><strong>Imbalance.</strong> Using all energy on freshers. Ensure regular events keep the society balanced year-round.</p>
-            </div>
-        </div>
-
-        <div class="qa-card" onclick="toggleGridCard(this)">
-            <div class="qa-card-header">
-                <span class="qa-icon">4</span>
-                <h3 class="qa-title">How should we resolve major disagreements?</h3>
-            </div>
-            <div class="qa-card-body">
-                <p><strong>Open communication.</strong> Arrange meetings to listen to all sides. Avoid suspicion and gossiping.</p>
-            </div>
-        </div>
-
-        <div class="qa-card" onclick="toggleGridCard(this)">
-            <div class="qa-card-header">
-                <span class="qa-icon">5</span>
-                <h3 class="qa-title">What is the Treasurer’s duty regarding Amanah?</h3>
-            </div>
-            <div class="qa-card-body">
-                <p><strong>A Sacred Trust.</strong> Finances are a trust from Allah. Handle funds with complete honesty.</p>
-            </div>
-        </div>
-
-        <div class="qa-card" onclick="toggleGridCard(this)">
-            <div class="qa-card-header">
-                <span class="qa-icon">6</span>
-                <h3 class="qa-title">We struggle to keep volunteers engaged. Solution?</h3>
-            </div>
-            <div class="qa-card-body">
-                <p><strong>Barakah & Thanks.</strong> Remind members of spiritual rewards and always give genuine public praise.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    .qa-grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 15px;
-        width: 100%;
-        max-width: 1100px;
-        margin: 0 auto;
-        box-sizing: border-box;
-    }
-
-    .qa-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 8px;
-        padding: 20px; 
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        height: fit-content;
-    }
-
-    .qa-card:hover { 
-        border-color: #00203F; 
-        box-shadow: 0 4px 12px rgba(0, 32, 63, 0.08); 
-    }
-
-    .qa-card.open { 
-        border-left: 5px solid #ECA400; 
-        border-color: #ECA400;
-        background: #FFFFFF;
-    }
-
-    .qa-card-header { display: flex; align-items: flex-start; gap: 12px; pointer-events: none; }
-    
-    .qa-icon {
-        background: #F1F5F9; 
-        color: #00203F; 
-        font-weight: 800;
-        width: 30px; 
-        height: 30px; 
-        border-radius: 50%;
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        flex-shrink: 0; 
-        font-size: 0.85rem;
-    }
-
-    .qa-card.open .qa-icon { background: #00203F; color: #FFFFFF; }
-    
-    .qa-title { 
-        font-family: 'Montserrat', sans-serif; 
-        font-size: 0.95rem; 
-        margin: 2px 0 0 0; 
-        color: #00203F; 
-        line-height: 1.4;
-        text-align: left;
-    }
-
-    .qa-card-body { 
-        max-height: 0; 
-        overflow: hidden; 
-        transition: max-height 0.4s ease-out; 
-        color: #475569; 
-        font-size: 0.9rem; 
-    }
-
-    .qa-card-body p { 
-        margin: 15px 0 0 0; 
-        padding-top: 10px; 
-        border-top: 1px solid #F1F5F9; 
-        text-align: left;
-    }
-
-    @media (max-width: 900px) {
-        .qa-grid-container { grid-template-columns: repeat(2, 1fr); }
-    }
-    
-    @media (max-width: 600px) {
-        .qa-grid-container { grid-template-columns: 1fr; }
-    }
-</style>
-
-<script>
-function toggleGridCard(card) {
-    const body = card.querySelector('.qa-card-body');
-    const isOpen = card.classList.contains('open');
-
-    document.querySelectorAll('.qa-card').forEach(c => {
-        c.classList.remove('open');
-        c.querySelector('.qa-card-body').style.maxHeight = null;
-    });
-
-    if (!isOpen) {
-        card.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + "px";
-    }
-
-    setTimeout(() => {
-        const height = document.body.scrollHeight + 20;
-        window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height }, '*');
-    }, 450);
-}
-</script>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --fosis-navy: #00203F;
-        --fosis-gold: #ECA400; 
-        --white: #ffffff;
-        --fosis-gray: #f8fafc;
-    }
-
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: var(--white);
-        overflow-x: hidden; 
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .master-wrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-    }
-
-    /* --- HERO SECTION --- */
-    .hero-container {
-        position: relative;
-        width: 100%;
-        background: var(--fosis-gray);
-        padding: 60px 20px 40px; /* Increased top padding since bridge is removed */
-        text-align: center;
-        overflow: hidden; 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .hero-container::before {
-        content: "RECORDS";
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: clamp(5rem, 18vw, 12rem);
-        font-weight: 900;
-        color: rgba(0, 32, 63, 0.03);
-        letter-spacing: 15px;
-        z-index: 1;
-        pointer-events: none;
-        white-space: nowrap;
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        max-width: 600px;
-    }
-
-    .hero-content h2 {
-        margin: 0;
-        font-weight: 900;
-        font-size: clamp(1.8rem, 8vw, 3rem); 
-        text-transform: uppercase;
-        letter-spacing: -0.5px;
-        line-height: 1.1;
-        color: var(--fosis-navy);
-    }
-
-    .accent-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 15px;
-    }
-
-    .line {
-        width: 30px;
-        height: 2px;
-        background: var(--fosis-gold);
-        border-radius: 2px;
-    }
-
-    .hero-subtitle {
-        color: var(--fosis-gold);
-        font-weight: 800;
-        font-size: 0.75rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-    }
-
-    .header-arrow {
-        margin: 25px auto 0;
-        width: 28px;
-        height: 28px;
-        color: var(--fosis-navy);
-        opacity: 0.2;
-        display: block;
-    }
-
-    /* --- CONTENT AREA & 4-COLUMN GRID --- */
-    .content-area {
-        padding: 40px 20px 80px;
-        max-width: 1300px;
-        width: 100%;
-        margin: 0 auto;
-        box-sizing: border-box;
-    }
-
-    .handover-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    @media (min-width: 600px) {
-        .handover-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (min-width: 1024px) {
-        .handover-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    .handover-card {
-        background: var(--white);
-        border: 1px solid #e2e8f0;
-        padding: 25px;
-        border-radius: 15px;
-        transition: all 0.4s ease;
-        text-align: left;
-    }
-
-    .handover-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0,32,63,0.06);
-        border-color: var(--fosis-gold);
-    }
-
-    .handover-card h3 {
-        color: var(--fosis-navy);
-        margin: 0 0 12px;
-        font-size: 0.95rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-
-    .icon-dot {
-        width: 8px;
-        height: 8px;
-        background-color: var(--fosis-gold);
-        border-radius: 50%;
-    }
-
-    .handover-card p {
-        color: #475569;
-        line-height: 1.6;
-        font-size: 0.85rem;
-        margin: 0;
-    }
-
-    @media (max-width: 600px) {
-        .hero-container::before { letter-spacing: 8px; font-size: 5.5rem; }
-        .hero-container { padding: 40px 15px 40px; }
-    }
-</style>
-</head>
-<body>
-
-<div class="master-wrapper" id="height-hook">
-
-    <div class="hero-container">
-        <div class="hero-content">
-            <h2>Key Handover<br>Documentation</h2>
-            <div class="accent-wrapper">
-                <div class="line"></div>
-                <div class="hero-subtitle">The Final Transition</div>
-                <div class="line"></div>
-            </div>
-            
-            <svg class="header-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-        </div>
-    </div>
-
-    <div class="content-area">
-        <div class="handover-grid">
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Annual Report</h3>
-                <p>A summary of the year's accomplishments and activities.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Constitution</h3>
-                <p>The formal governing document explaining how the ISoc runs.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Meeting Minutes</h3>
-                <p>An archive of all previous meeting minutes and key decisions.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Access & Passwords</h3>
-                <p>Securely hand over email, social media, and website credentials.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Finance & Accounts</h3>
-                <p>Budgets, sponsor info, and comprehensive financial reports.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>SU Relations</h3>
-                <p>Key information on room bookings and relationship history.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Prayer Room Guidance</h3>
-                <p>University rules and best practices for managing the prayer room.</p>
-            </div>
-            <div class="handover-card">
-                <h3><span class="icon-dot"></span>Inventory of Assets</h3>
-                <p>A full list of ISoc property, from banners to sports equipment.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function sendHeight() {
-        const wrapper = document.getElementById('height-hook');
-        if (wrapper) {
-            const height = Math.ceil(wrapper.getBoundingClientRect().height) + 20;
-            window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height }, '*');
+        // Final sync for Google Sites
+        function syncHeight() {
+            window.parent.postMessage({ 
+                sentinel: 'amp', 
+                type: 'embed-size', 
+                height: document.body.scrollHeight 
+            }, '*');
         }
-    }
-
-    if (window.ResizeObserver) {
-        const ro = new ResizeObserver(sendHeight);
-        ro.observe(document.getElementById('height-hook'));
-    }
-
-    window.onload = sendHeight;
-    window.onresize = sendHeight;
-    document.fonts.ready.then(sendHeight);
-    setInterval(sendHeight, 2500);
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-<style>
-    /* CLEAN RESET */
-    * { box-sizing: border-box; }
-    html, body { 
-        margin: 0 !important; 
-        padding: 0 !important; 
-        background: transparent;
-        overflow: hidden !important;
-        width: 100%;
-    }
-
-    #button-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px 0;
-    }
-
-    /* THE VERTICAL BRIDGE */
-    .divider-line {
-        width: 2px;
-        height: 15px;
-        background: #ECA400;
-        margin-bottom: 10px;
-    }
-
-    /* HIGH-VISIBILITY NAVY BUTTON */
-    .fosis-action-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        background: #00203F;
-        border: 2px solid #ECA400;
-        padding: 16px 30px;
-        border-radius: 12px;
-        width: 92%;
-        max-width: 450px;
-        text-decoration: none;
-        box-shadow: 0 8px 25px rgba(0,32,63,0.18);
-        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    .fosis-action-btn:active {
-        transform: scale(0.97);
-    }
-
-    .fosis-action-btn:hover {
-        background: #002e5a;
-        box-shadow: 0 10px 30px rgba(0,32,63,0.25);
-    }
-
-    .btn-label {
-        font-family: 'Montserrat', sans-serif;
-        color: #FFFFFF;
-        font-weight: 900;
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        text-align: center;
-        line-height: 1.4;
-    }
-
-    .btn-arrow {
-        color: #ECA400;
-        font-size: 20px;
-        font-weight: 900;
-        line-height: 1;
-    }
-
-    /* SUBTLE FOOTER HINT */
-    .footer-note {
-        margin-top: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 9px;
-        color: #64748b;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        opacity: 0.8;
-    }
-
-    @media (max-width: 600px) {
-        .fosis-action-btn { padding: 14px 22px; }
-        .btn-label { font-size: 11px; letter-spacing: 0.8px; }
-        .divider-line { height: 12px; }
-    }
-</style>
-</head>
-<body>
-
-<div id="button-container">
-    <div class="divider-line"></div>
-
-    <a href="https://sites.google.com/fosis.org.uk/isocessentials/events-campaigns" target="_blank" class="fosis-action-btn">
-        <span class="btn-label">Click here to start planning your Freshers' Week</span>
-        <span class="btn-arrow">→</span>
-    </a>
-
-    <div class="footer-note">Isoc Planning Toolkit</div>
-</div>
-
-<script>
-    function updateHeight() {
-        const container = document.getElementById('button-container');
-        if (container) {
-            const height = container.offsetHeight;
-            window.parent.postMessage({ sentinel: 'amp', type: 'embed-size', height: height + 5 }, '*');
-        }
-    }
-
-    window.addEventListener('load', updateHeight);
-    window.addEventListener('resize', updateHeight);
-    setInterval(updateHeight, 1500);
-</script>
-
+        window.onload = syncHeight;
+        window.onresize = syncHeight;
+        setInterval(syncHeight, 2000);
+    </script>
 </body>
 </html>
