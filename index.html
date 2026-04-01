@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+<html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
     :root {
@@ -12,19 +13,21 @@
         --brand-white: #FFFFFF; 
         --brand-grey: #C7CBC8; 
     }
-
-    body, html { 
-        margin: 0; padding: 0; 
-        background: radial-gradient(circle at center, var(--brand-navy-light) 0%, var(--brand-navy) 45%);
-        font-family: 'Montserrat', sans-serif;
-        width: 100%;
-        color: var(--brand-white);
-        height: 100vh;
-        display: flex;
-        align-items: center; 
-        justify-content: center;
-        overflow: hidden; 
-    }
+body, html {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at center, var(--brand-navy-light) 0%, var(--brand-navy) 45%);
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    color: var(--brand-white);
+    min-height: 100vh; /* Changed from height: 100vh */
+    display: flex;
+    flex-direction: column; /* This forces elements to stack vertically */
+    align-items: center;
+    justify-content: flex-start; /* Aligns content to the top so you can scroll down */
+    overflow-x: hidden; /* Stops side-scrolling */
+    overflow-y: auto; /* Allows normal up-and-down scrolling */
+}    }
 
     .premium-banner {
         width: 100%;
