@@ -4,7 +4,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    /* --- THE ARCHITECT'S GLOBAL OVERRIDE --- */
 html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important; 
+    min-height: 100% !important;
+    /* This forces the scroll to turn on, even if hidden elsewhere */
+    overflow-y: auto !important; 
+    overflow-x: hidden !important;
+    display: block !important; 
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* This targets every single container in your 2000 lines 
+   and tells them they are NOT allowed to hide content */
+div, section, main, article {
+    overflow: visible !important;
+    height: auto !important;
+}html, body {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
